@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Insert title here</title>
+  </head>
+  <body>
+    Enter a number and text in the respective input fields and see what happens:
+    <br />
+    <br />
+
+    <form id="my-form">
+      <input type="text" id="numberInput"/> <br /> 
+      <textarea rows="5" id="textInput"></textarea>
+    </form>
+    
+    <!-- <p id="numberPara"></p> -->
+    <center><h2>Result</h2></center>
+    <p id="textPara"></p>
+
+  </body>
+
+  <link rel="stylesheet" type="text/css" href="text_box.css">
+  <script
+    src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+  
+  <script type="text/javascript">
+    var numberValue;
+    var textValue;
+    var i = 0;
+
+    $(document).ready(function() { 
+
+      $("#numberInput").keydown(function(){
+        numberValue = $('#numberInput').val();
+      });
+        
+      $("#numberInput").keyup(function(){
+        numberValue = $('#numberInput').val();
+        displayChangedText();
+      });
+      
+      $('#textInput').keydown(function(){
+            LimitCharacters($(this))
+        textValue = $('#textInput').val();
+            
+      });
+      $('#textInput').keyup(function() {
+            LimitCharacters($(this))
+        textValue = $('#textInput').val();
+        displayChangedText();
+      });
+    })
+
+    $('#my-form').on('change paste', ':input', function(e) {
+      textValue = $('#textInput').val();
+      $('#textPara').html(textValue);
+    });
+
+    function displayChangedText(){
+      $('#textPara').html(textValue);
+      $('#numberPara').html(numberValue);
+      return;
+      
+    }
+
+    function LimitCharacters(description) {
+        if (description.val().length > numberValue) {
+            description.val(description.val().substring(0, numberValue));
+        } /*else {
+            var nRemaining = nMaxLength - description.val().length;
+            $('.remaining').text(nRemaining);
+        }*/
+    }
+  </script>
+</html>
